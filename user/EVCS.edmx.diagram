@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6807d3808b1b45cabfc0ac954ccbaed2" Name="Diagram1">
+        <EntityTypeShape EntityType="EVCSModel.CarInfos" Width="1.5" PointX="0.75" PointY="0.5" />
+        <EntityTypeShape EntityType="EVCSModel.Records" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EVCSModel.SerialNumber" Width="1.5" PointX="3" PointY="1.625" />
+        <EntityTypeShape EntityType="EVCSModel.SerialNumberRecords" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EVCSModel.Singlevolume" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="EVCSModel.V_Records_Dayly_Volume" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="EVCSModel.CarTasks" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EVCSModel.PersonTasks" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="EVCSModel.Users" Width="1.5" PointX="3.375" PointY="6.25" />
+        <EntityTypeShape EntityType="EVCSModel.Count" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="EVCSModel.VolumeDetail" Width="1.5" PointX="7.375" PointY="6.75" />
+      </Diagram>
+      <Diagram DiagramId="88e5dcc32dd04cc08a005d73c799e825" Name="Diagram2" >
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{31342537-FACC-457B-9DB1-6FB107547E76}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EVCS</RootNamespace>
+    <AssemblyName>EVCS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>bitbug_favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analysis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Analysis.Designer.cs">
+      <DependentUpon>Analysis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CarInfos.cs">
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarTasks.cs">
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Count.cs">
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EVCS.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EVCS.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EVCS.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="小云\checkvolume.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="小云\checkvolume.Designer.cs">
+      <DependentUpon>checkvolume.cs</DependentUpon>
+    </Compile>
+    <Compile Include="小云\CloudMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="小云\CloudMain.Designer.cs">
+      <DependentUpon>CloudMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="小云\DataChangeTODO.cs" />
+    <Compile Include="小云\door.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="小云\door.Designer.cs">
+      <DependentUpon>door.cs</DependentUpon>
+    </Compile>
+    <Compile Include="小云\Enum.cs" />
+    <Compile Include="小云\level.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="小云\level.Designer.cs">
+      <DependentUpon>level.cs</DependentUpon>
+    </Compile>
+    <Compile Include="小云\Net.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="小云\Net.Designer.cs">
+      <DependentUpon>Net.cs</DependentUpon>
+    </Compile>
+    <Compile Include="小云\NetClass.cs" />
+    <Compile Include="小云\PointCloudUser.cs" />
+    <Compile Include="杂项\key.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="杂项\key.Designer.cs">
+      <DependentUpon>key.cs</DependentUpon>
+    </Compile>
+    <Compile Include="杂项\log.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="杂项\log.Designer.cs">
+      <DependentUpon>log.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewMain.Designer.cs">
+      <DependentUpon>NewMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonTasks.cs">
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Records.cs">
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SerialNumber.cs">
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SerialNumberRecords.cs">
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Singlevolume.cs">
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="小云\special.cs" />
+    <Compile Include="杂项\test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="杂项\test.Designer.cs">
+      <DependentUpon>test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VolumeDetail.cs">
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_Records_Dayly_Volume.cs">
+      <DependentUpon>EVCS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarInfoEnter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CarInfoEnter.Designer.cs">
+      <DependentUpon>CarInfoEnter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Enters_GenerateSN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enters_GenerateSN.Designer.cs">
+      <DependentUpon>Enters_GenerateSN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EVCS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EVCS.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EVCSDataSet.cs">
+      <DependentUpon>EVCSDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EVCSDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EVCSDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Function\GenerateSerialNumber.cs" />
+    <Compile Include="体积测量\Timechange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="体积测量\Timechange.Designer.cs">
+      <DependentUpon>Timechange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="查询\carfind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="查询\carfind.Designer.cs">
+      <DependentUpon>carfind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="查询\find.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="查询\find.Designer.cs">
+      <DependentUpon>find.cs</DependentUpon>
+    </Compile>
+    <Compile Include="查询\InfoSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="查询\InfoSearch.Designer.cs">
+      <DependentUpon>InfoSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFrame.Designer.cs">
+      <DependentUpon>MainFrame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="查询\SingleVolume.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="查询\SingleVolume.Designer.cs">
+      <DependentUpon>SingleVolume.cs</DependentUpon>
+    </Compile>
+    <Compile Include="调配\人员调配\PersonTaskLists.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="调配\人员调配\PersonTaskLists.Designer.cs">
+      <DependentUpon>PersonTaskLists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="调配\人员调配\AddPersonTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="调配\人员调配\AddPersonTask.Designer.cs">
+      <DependentUpon>AddPersonTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="调配\车辆调配\AddCarTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="调配\车辆调配\AddCarTask.Designer.cs">
+      <DependentUpon>AddCarTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="调配\车辆调配\CarTasksLists.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="调配\车辆调配\CarTasksLists.Designer.cs">
+      <DependentUpon>CarTasksLists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="预测\Forecast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="预测\Forecast.Designer.cs">
+      <DependentUpon>Forecast.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Analysis.resx">
+      <DependentUpon>Analysis.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="小云\checkvolume.resx">
+      <DependentUpon>checkvolume.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="小云\CloudMain.resx">
+      <DependentUpon>CloudMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="小云\door.resx">
+      <DependentUpon>door.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="小云\level.resx">
+      <DependentUpon>level.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="小云\Net.resx">
+      <DependentUpon>Net.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="杂项\key.resx">
+      <DependentUpon>key.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="杂项\log.resx">
+      <DependentUpon>log.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewMain.resx">
+      <DependentUpon>NewMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="杂项\test.resx">
+      <DependentUpon>test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CarInfoEnter.resx">
+      <DependentUpon>CarInfoEnter.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Enters_GenerateSN.resx">
+      <DependentUpon>Enters_GenerateSN.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="体积测量\Timechange.resx">
+      <DependentUpon>Timechange.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="查询\carfind.resx">
+      <DependentUpon>carfind.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="查询\find.resx">
+      <DependentUpon>find.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="查询\InfoSearch.resx">
+      <DependentUpon>InfoSearch.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFrame.resx">
+      <DependentUpon>MainFrame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="查询\SingleVolume.resx">
+      <DependentUpon>SingleVolume.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="调配\人员调配\AddPersonTask.resx">
+      <DependentUpon>AddPersonTask.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="调配\人员调配\PersonTaskLists.resx">
+      <DependentUpon>PersonTaskLists.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="调配\车辆调配\AddCarTask.resx">
+      <DependentUpon>AddCarTask.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="调配\车辆调配\CarTasksLists.resx">
+      <DependentUpon>CarTasksLists.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="预测\Forecast.resx">
+      <DependentUpon>Forecast.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="EVCS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EVCS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EVCS.edmx.diagram">
+      <DependentUpon>EVCS.edmx</DependentUpon>
+    </None>
+    <None Include="EVCSDataSet.xsc">
+      <DependentUpon>EVCSDataSet.xsd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EVCSDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EVCSDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EVCSDataSet.xss">
+      <DependentUpon>EVCSDataSet.xsd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bitbug_favicon.ico" />
+    <Content Include="EVCS.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EVCS.Context.cs</LastGenOutput>
+      <DependentUpon>EVCS.edmx</DependentUpon>
+    </Content>
+    <Content Include="EVCS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EVCS.cs</LastGenOutput>
+      <DependentUpon>EVCS.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
