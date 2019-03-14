@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "server", "EVCS\server.csproj", "{31342537-FACC-457B-9DB1-6FB107547E76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User", "EVCS\User.csproj", "{31342537-FACC-457B-9DB1-6FB107547E76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "user", "user\user.csproj", "{397C9935-C5F7-4402-A17C-185CDCE999BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "usertest", "user\usertest.csproj", "{397C9935-C5F7-4402-A17C-185CDCE999BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
