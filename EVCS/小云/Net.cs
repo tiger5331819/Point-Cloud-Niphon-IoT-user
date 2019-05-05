@@ -18,30 +18,33 @@ namespace EVCS.小云
         {
             InitializeComponent();
             net = this;
+            Thread thread = new Thread(change_Click2);
+            thread.IsBackground = true;
+            thread.Start();
         }
         public static Network net;
         private void Net_Load(object sender, EventArgs e)
         {
-            foreach(IPList a in NewMain.Nform.cloud.getiplist)
+            foreach (IPList a in NewMain.Nform.cloud.iplist)
             {
-                if (a.ID !=null)
+                if (a.ID != null)
                 {
                     cblnet.Items.Add(a.IP);
                 }
             }
-           
+
         }
 
         private void cblnet_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (IPList a in NewMain.Nform.cloud.getiplist)
+            foreach (IPList a in NewMain.Nform.cloud.iplist)
             {
-                if (cblnet.Text==a.IP)
+                if (cblnet.Text == a.IP)
                 {
-                        labelnetname.Text = Convert.ToString(a.ID);
+                    labelnetname.Text = Convert.ToString(a.ID);
                 }
             }
-            
+
         }
 
         /// <summary>
@@ -55,13 +58,29 @@ namespace EVCS.小云
             cblnet.Items.Clear();
             cblnet.Text = "";
             Thread.Sleep(100);
-            foreach (IPList a in NewMain.Nform.cloud.getiplist)
+            foreach (IPList a in NewMain.Nform.cloud.iplist)
             {
                 if (a.ID != null)
                 {
                     cblnet.Items.Add(a.IP);
                 }
             }
+        }
+        void change_Click2()
+        {
+            while(true)
+            {
+                cblnet.Items.Clear();
+                foreach (IPList a in NewMain.Nform.cloud.iplist)
+                {
+                    if (a.ID != null)
+                    {
+                        cblnet.Items.Add(a.IP);
+                    }
+                }
+                Thread.Sleep(1000);
+            }
+
         }
 
         /// <summary>

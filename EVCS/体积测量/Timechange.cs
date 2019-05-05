@@ -70,7 +70,7 @@ namespace EVCS.体积测量
 
             NewMain.Nform.cloud.Data.volume.carName = textBox1.Text;
             NewMain.Nform.cloud.Data.volume.carVolume =Convert.ToDecimal( textBox2.Text);
-            NewMain.Nform.cloud.cloudnet.Send(NewMain.Nform.cloud.cloudnet.UserDataToPackage(NewMain.Nform.cloud.Data,Messagetype.update));
+            NewMain.Nform.cloud.cloudnet.Send(NewMain.Nform.cloud.cloudnet.UserDataToPackage(NewMain.Nform.cloud.Data.GetData(),Messagetype.update));
             MessageBox.Show("计划任务时间更改");
         }
 

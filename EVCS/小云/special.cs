@@ -22,12 +22,9 @@ namespace EVCS
     }
     public class Special
     {
-        public UserData Data;
-        public IPList[] iplist = new IPList[20];
-        public IPList[] getiplist
-        {
-            get { return iplist; }
-        }
+        public User Data;
+        public List<IPList> iplist = new List<IPList>(100);
+
         string EVCSversion;
         string Volumeversion;
         public string EVCSv
@@ -41,22 +38,8 @@ namespace EVCS
             set { Volumeversion = value; }
         }
         public Special cloud;
-        public DataChangeTODO changeTODO;
         public UserNet cloudnet;
-     
-        //Calc calc;
-        //public Calc Calc
-        //{
-        //    get { return calc; }
-        //}
-        //public bool getcalc(Calc c)
-        //{
-        //    calc = c;
-        //    return true;
-        //}
-
-        
-
+    
         public void showxml()
         {
             for (int i = 0; i < 3; i++)
@@ -72,16 +55,10 @@ namespace EVCS
         /// </summary>
         public Special()
         {
-            this.Data = new UserData();
-            loadxml();
-            for (int i = 0; i < 20; i++)
-            {
-                iplist[i].ID = null;
-                iplist[i].IP = null;
-            }        
+            this.Data = new User("User", "PointCloud-EVCS");
+            loadxml();     
             cloud = this;
             this.cloudnet = new UserNet(ref Data,ref cloud);
-            this.changeTODO = new DataChangeTODO(ref Data, ref cloud);
         }
 
         public int gethour(int a, bool flag)
@@ -118,8 +95,10 @@ namespace EVCS
         }
         public void loadxml()
         {
+            XDocument document=new XDocument();
             //将XML文件加载进来
-            XDocument document = XDocument.Load("config.xml");
+            document= XDocument.Load("config.xml");
+
             //获取到XML的根元素进行操作
             XElement root = document.Root;
 
@@ -218,7 +197,7 @@ namespace EVCS
             //获得当前工程路径
             logPath = Path.GetDirectoryName(Application.ExecutablePath);
             //创建日志文件夹
-            string path = logPath + "/日志文件";
+            string path = logPath + "/行动日志文件";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);

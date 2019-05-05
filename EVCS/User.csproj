@@ -147,7 +147,6 @@
     <Compile Include="小云\CloudMain.Designer.cs">
       <DependentUpon>CloudMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="小云\DataChangeTODO.cs" />
     <Compile Include="小云\door.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,7 +166,7 @@
     <Compile Include="小云\Net.Designer.cs">
       <DependentUpon>Net.cs</DependentUpon>
     </Compile>
-    <Compile Include="小云\NetClass.cs" />
+    <Compile Include="小云\PointCloud-IoT-Core.cs" />
     <Compile Include="小云\PointCloudUser.cs" />
     <Compile Include="杂项\key.cs">
       <SubType>Form</SubType>

@@ -10,92 +10,138 @@ using System.Windows.Forms;
 
 namespace EVCS
 {
-    [Serializable]
-    public class UserData : TypeData
-    {
-        public volumecontrol newvolumecontrol;
-        public NetIP ip;
-        public string IP;
-        public string DeviceID;
-        public Boolean Live = false;
 
-        public UserData()
+    public class SF : SerializableFind
+    {
+        public override Type BindToType(string assemblyName, string typeName)
         {
-            DeviceID = null;
+            if (typeName.Contains("List") == true && typeName.Contains(typeof(IPList).Name) == true)
+            {
+                return typeof(List<IPList>);
+            }
+
+            return base.BindToType(assemblyName, typeName);
+        }
+    }
+    [Serializable]
+    public struct configtimexml
+    {
+        public string time;
+        public string beginhour;
+        public string beginminute;
+        public string endminute;
+        public string endhour;
+    }
+    [Serializable]
+    public struct NetIP
+    {
+        string ip;
+        public string IP
+        {
+            get { return ip; }
+            set { ip = value; }
+        }
+        int point;
+        public int Point
+        {
+            get { return point; }
+            set { point = value; }
+        }
+    }
+    [Serializable]
+    public struct volumecontrol
+    {
+        public int carNo;
+        public string carName;
+        public decimal? carVolume;
+        public string carSN;
+        public decimal? volume;
+
+        public string count;
+        public int Loadingrate;
+        public string Endtime;
+        public string Begintime;
+
+    }
+    [Serializable]
+    public class UserData:IoT_Data
+    {
+        public configtimexml[] configtime;
+        public volumecontrol volume;        
+
+        public UserData(string typedata, string typesystem) :base(typedata,typesystem)
+        {
+            configtime = new configtimexml[3];
+            volume = new volumecontrol();
+        }
+        public UserData():base()
+        {
+
+        }
+        public UserData GetData()
+        {
+            UserData data = new UserData(this.TypeData, this.TypeSystem);
+            data.volume = this.volume;
+            for (int i = 0; i < 3; i++)
+            {
+                data.configtime[i] = this.configtime[i];
+            }
+            return data;
+        }
+    }
+    [Serializable]
+    public class User : UserData
+    {
+        public NetIP ip;
+        public Messagetype messagetype;
+        public Codemode codemode;
+        public User(string typedata, string typesystem) :base(typedata,typesystem)
+        {
             ip = new NetIP();
         }
-        public bool newdatachange()
+        public bool Update(UserData data)
         {
-            if (flag)
-                return true;
-            else return false;
+            try
+            {
+                for(int i=0;i<3;i++)
+                {
+                    configtime[i] = data.configtime[i];
+                }
+                volume = data.volume;
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage.GetError(ex);
+                return false;
+            }
+            return true;
         }
 
     }
 
 
-    public class UserNet:NetClass
+    public class UserNet:IoT_Net
     {
-        UserData Data;
-        IPAddress ip;
-        IPEndPoint point;
+        User Data;
         Special cloud;
-        Boolean connectflag = true;
 
-        public UserNet(ref UserData data,ref Special s)
+        public UserNet(ref User data,ref Special s):base("User")
         {
-            typenet = TypeNet.CenterSever;
             ip = IPAddress.Parse(data.ip.IP);
             point = new IPEndPoint(ip, data.ip.Point);
             this.cloud = s;
             Data = data;
 
-            Thread connect = new Thread(userconnect);
-            connect.IsBackground = true;
-            connect.Start();
+            Connect();
         }
-
-        /// <summary>
-        /// 创建一个服务器socket对象，走到监听端口这一步，新建线程，并将服务器socket对象传递过去，
-        /// 用于实时创建连接的客户端socket
-        /// </summary>
-        /// <returns></returns>
-        public void userconnect()
+        public override void ReceiveCommand()
         {
-            while (true)
-            {
-                if (connectflag)
-                {
-                    try
-                    {
-                        socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                        socket.Connect(point);
-                        Send(UserDataToPackage(Data, Messagetype.codeus));
-
-                        Thread waitcommand = new Thread(ReceiveMsg);
-                        waitcommand.IsBackground = true;
-                        waitcommand.Start(socket);
-                        //MessageBox.Show("Link server");
-                        connectflag = false;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
-                else Thread.Sleep(5000);
-            }
-        }
-
-        void ReceiveMsg(object o)
-        {
-            Socket client = o as Socket;
- 
+            Send(UserDataToPackage(Data.GetData(), Messagetype.codeus));
             void ipinfo()
             {
                 byte[] buf = new byte[1024 * 1024];
               
-                client.Receive(buf);           
+                socket.Receive(buf);           
                 Package package= BytesToPackage(buf);
                 if (package.message == Messagetype.codeus)
                     ReceiveIPList(package);
@@ -108,19 +154,15 @@ namespace EVCS
                 try
                 {
                     byte[] buffer = new byte[1024 * 1024];
-                    int n = client.Receive(buffer);
+                    int n = socket.Receive(buffer);
                     Package package = BytesToPackage(buffer);
                     switch (package.message)
                     {
-                        case Messagetype.package:
-                            PackageToUserData packageToData = new PackageToUserData(NewUserData);
-                            packageToData(package); break;
+                        case Messagetype.package:NewUserData(package); break;
                         case Messagetype.carinfomessage:
-                            PackageToUserData carinfomessageToData = new PackageToUserData(NewVolumeMessage);
-                            carinfomessageToData(package); break;
+                            NewVolumeMessage(package); break;
                         case Messagetype.volumepackage:
-                            PackageToUserData volumepackageToData = new PackageToUserData(NewVolumeMessage);
-                            volumepackageToData(package); break;
+                            NewVolumeMessage(package); break;
                         case Messagetype.codeus: ReceiveIPList(package);break;
                     }
                 }
@@ -132,7 +174,27 @@ namespace EVCS
                 }
             }
         }
-
+        public new static Package BytesToPackage(byte[] buffer)
+        {
+            try
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    ms.Write(buffer, 0, buffer.Length);
+                    ms.Flush();
+                    ms.Position = 0;
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Binder = new SF();
+                    Package package = (Package)bf.Deserialize(ms);
+                    return package;
+                }
+            }
+            catch (Exception e)
+            {
+                ErrorMessage.GetError(e);
+                return new Package();
+            }
+        }
 
         public void ReceiveIPList(Package package)
         {
@@ -142,7 +204,7 @@ namespace EVCS
                 ms.Flush();
                 ms.Position = 0;
                 BinaryFormatter bf = new BinaryFormatter();
-               cloud.iplist= (IPList[])bf.Deserialize(ms);
+               cloud.iplist= (List<IPList>)bf.Deserialize(ms);
             }
         }
 
@@ -175,18 +237,15 @@ namespace EVCS
         void NewUserData(Package package)
         {
             UserData data = new UserData();
-            data.datatype = Datatype.User;
             using (MemoryStream ms = new MemoryStream())
             {
                 ms.Write(package.data, 0, package.data.Length);
                 ms.Flush();
                 ms.Position = 0;
                 BinaryFormatter bf = new BinaryFormatter();
-                Data = (UserData)bf.Deserialize(ms);
-
-                //Data.messagetype = package.message;
-                //Data.flag = true;              
+                data = (UserData)bf.Deserialize(ms);
             }
+            Data.Update(data);
         }
         
         void NewVolumeMessage(Package package)
@@ -197,11 +256,43 @@ namespace EVCS
                 ms.Flush();
                 ms.Position = 0;
                 BinaryFormatter bf = new BinaryFormatter();
-                Data.newvolumecontrol = (volumecontrol)bf.Deserialize(ms);
 
-                Data.messagetype = package.message;
-                Data.flag = true;              
+                Data.volume = (volumecontrol)bf.Deserialize(ms);
+
+                Data.messagetype = package.message;          
             }
+        }
+
+        public Package UserDataToPackage(UserData data, Messagetype messagetype = Messagetype.package)
+        {
+            Package package = new Package();
+            package.data = null;
+            try
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    switch (messagetype)
+                    {
+                        case Messagetype.carinfomessage: bf.Serialize(ms, data.volume); break;
+                        case Messagetype.volumepackage: bf.Serialize(ms, data.volume); break;
+                        case Messagetype.package: bf.Serialize(ms, data); break;
+                        case Messagetype.codeus: bf.Serialize(ms, data); break;
+                        default: bf.Serialize(ms, data); break;
+                    }
+                    ms.Flush();
+
+                    package.message = messagetype;
+                    package.data = ms.ToArray();
+                }
+                return package;
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage.GetError(ex);
+
+            }
+            return package;
         }
     }
 }
