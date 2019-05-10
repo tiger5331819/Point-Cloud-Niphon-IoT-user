@@ -81,6 +81,7 @@ namespace EVCS
         public UserData GetData()
         {
             UserData data = new UserData(this.TypeData, this.TypeSystem);
+            data.ID = ID;
             data.volume = this.volume;
             for (int i = 0; i < 3; i++)
             {
