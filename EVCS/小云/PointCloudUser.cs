@@ -205,7 +205,8 @@ namespace EVCS
                 ms.Flush();
                 ms.Position = 0;
                 BinaryFormatter bf = new BinaryFormatter();
-               cloud.iplist= (List<IPList>)bf.Deserialize(ms);
+                cloud.iplist= (IPList[])bf.Deserialize(ms);
+                NewMain.Nform.cloud.IPListflag = true;
             }
         }
 

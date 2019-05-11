@@ -81,7 +81,7 @@
             this.change.TabIndex = 1;
             this.change.Text = "更新";
             this.change.UseVisualStyleBackColor = true;
-            this.change.Click += new System.EventHandler(this.change_Click);
+            this.change.Visible = false;
             // 
             // link
             // 
@@ -363,7 +363,6 @@
             this.Controls.Add(this.cblnet);
             this.Name = "Network";
             this.Text = "客户端状况";
-            this.Load += new System.EventHandler(this.Net_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

@@ -23,17 +23,6 @@ namespace EVCS.小云
             thread.Start();
         }
         public static Network net;
-        private void Net_Load(object sender, EventArgs e)
-        {
-            foreach (IPList a in NewMain.Nform.cloud.iplist)
-            {
-                if (a.ID != null)
-                {
-                    cblnet.Items.Add(a.IP);
-                }
-            }
-
-        }
 
         private void cblnet_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -70,17 +59,23 @@ namespace EVCS.小云
         {
             while(true)
             {
-                cblnet.Items.Clear();
-                foreach (IPList a in NewMain.Nform.cloud.iplist)
+                if(NewMain.Nform.cloud.IPListflag)
                 {
-                    if (a.ID != null)
+                    bool flag = false;
+                    cblnet.Items.Clear();
+                    foreach (IPList a in NewMain.Nform.cloud.iplist)
                     {
-                        cblnet.Items.Add(a.IP);
+                        if (a.ID != null)
+                        {
+                            cblnet.Items.Add(a.ID);
+                            if (cblnet.Text == a.ID) flag = true;
+                        }
                     }
+                    if (!flag) cblnet.Text = "";
+                    NewMain.Nform.cloud.IPListflag = false;
                 }
                 Thread.Sleep(1000);
             }
-
         }
 
         /// <summary>
@@ -91,7 +86,7 @@ namespace EVCS.小云
         /// <param name="e"></param>
         private void link_Click(object sender, EventArgs e)
         {       
-            if(link.Text=="链接")
+            if(link.Text=="链接"&&cblnet.Text!="")
             {
                 NewMain.Nform.cloud.cloudnet.Send(DeviceID());
                 NewMain.Nform.cloud.cloudnet.Send(NewMain.Nform.cloud.cloudnet.CreatCodeToPackage(Codemode.monitor));
@@ -175,15 +170,6 @@ namespace EVCS.小云
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelflag1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {

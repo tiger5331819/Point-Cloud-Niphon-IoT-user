@@ -23,7 +23,8 @@ namespace EVCS
     public class Special
     {
         public User Data;
-        public List<IPList> iplist = new List<IPList>(100);
+        public IPList[] iplist = new IPList[100];
+        public bool IPListflag = false;
 
         string EVCSversion;
         string Volumeversion;
